@@ -9,7 +9,7 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/ubuntu14/latest/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/ubuntu14/latest trusty main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y salt-master=${SALT_VERSION}* \
+  && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master\n" > /etc/salt/minion.d/masters.conf \
   && echo "auto_accept: True" > /etc/salt/master.d/auto_sign.conf \
