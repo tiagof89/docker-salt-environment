@@ -1,5 +1,5 @@
 master:
-  container_name: salt-slave-master
+  container_name: salt-master
   image: dawidmalina/docker-salt-master:latest
   environment:
     LOG_LEVEL: info
@@ -12,7 +12,7 @@ master:
     - ./ext_pillar.conf:/etc/salt/master.d/ext_pillar.conf:rw
 
 minion1:
-  container_name: salt-slave-ubuntu-14.04
+  container_name: salt-slave-ubuntu-14-04
   image: dawidmalina/docker-salt-slave-ubuntu:14.04
   links:
    - master
@@ -21,7 +21,7 @@ minion1:
   hostname: minion1
 
 minion2:
-  container_name: salt-slave-centos-7.1
+  container_name: salt-slave-centos-7-1
   image: dawidmalina/docker-salt-slave-centos:7.1
   links:
    - master
