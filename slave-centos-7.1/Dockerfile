@@ -1,6 +1,6 @@
 FROM centos:centos7.1.1503
 
-ENV SALT_VERSION=2015.5.3-1.el7
+ENV SALT_VERSION=2015.8.3-1.el7
 
 ADD start.sh /bin/start.sh
 
