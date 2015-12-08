@@ -5,10 +5,8 @@ ENV SALT_VERSION=2015.5.3+ds-1
 ADD start.sh /bin/start.sh
 
 RUN apt-get update \
-  && apt-get install -y vim-nox curl \
-#  && curl -L https://repo.saltstack.com/apt/ubuntu/ubuntu14/latest/SALTSTACK-GPG-KEY.pub | apt-key add - \
-#  && echo "deb http://repo.saltstack.com/apt/ubuntu/ubuntu14/latest wily main" > /etc/apt/sources.list.d/saltstack.list \
-#  && apt-get update \
+  && apt-get install -y vim-nox curl software-properties-common \
+  && add-apt-repository ppa:saltstack/salt \
   && apt-get install -y salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
