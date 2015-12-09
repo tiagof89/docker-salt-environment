@@ -13,6 +13,7 @@ RUN apt-get update \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && rm -rf /var/lib/apt/lists/* \
-  && apt-get clean
+  && apt-get clean \
+  && echo "testmode: true\n" > /etc/salt/grains
 
 ENTRYPOINT ["/bin/start.sh"]

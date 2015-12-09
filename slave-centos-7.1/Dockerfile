@@ -10,6 +10,7 @@ RUN rpm --import https://repo.saltstack.com/yum/redhat/7/x86_64/latest/SALTSTACK
   && mkdir -p /etc/salt/minion.d \
   && echo -e "master: master" > /etc/salt/minion.d/masters.conf \
   && rm -rf /var/lib/yum/* \
-  && yum clean all
+  && yum clean all \
+  && echo -e "testmode: true\n" > /etc/salt/grains
 
 ENTRYPOINT ["/bin/start.sh"]
