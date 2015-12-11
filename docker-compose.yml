@@ -9,32 +9,41 @@ master:
     - "4505"
     - "4506"
   volumes:
-    - ./salt:/srv/salt/:rw
-    - ./ext_pillar.conf:/etc/salt/master.d/ext_pillar.conf:rw
+    - ./srv/salt:/srv/salt/:rw
+    - ./etc/salt/master.d/ext_pillar.conf:/etc/salt/master.d/ext_pillar.conf:rw
 
-minion1:
+ubuntu-14-04:
   container_name: salt-slave-ubuntu-14-04
   image: dawidmalina/docker-salt-slave-ubuntu:14.04
   links:
    - master
   environment:
     LOG_LEVEL: info
-  hostname: minion1
+  hostname: ubuntu-14-04
 
-minion2:
-  container_name: salt-slave-centos-7-1
-  image: dawidmalina/docker-salt-slave-centos:7.1
-  links:
-   - master
-  environment:
-    LOG_LEVEL: info
-  hostname: minion2
-
-minion3:
+ubuntu-15-10:
   container_name: salt-slave-ubuntu-15-10
   image: dawidmalina/docker-salt-slave-ubuntu:15.10
   links:
    - master
   environment:
     LOG_LEVEL: info
-  hostname: minion3
+  hostname: ubuntu-15-10
+
+centos-6-7:
+  container_name: salt-slave-centos-6-7
+  image: dawidmalina/docker-salt-slave-centos:6.7
+  links:
+   - master
+  environment:
+    LOG_LEVEL: info
+  hostname: centos-6-7
+
+centos-7-1:
+  container_name: salt-slave-centos-7-1
+  image: dawidmalina/docker-salt-slave-centos:7.1
+  links:
+   - master
+  environment:
+    LOG_LEVEL: info
+  hostname: centos-7-1
