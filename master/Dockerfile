@@ -17,6 +17,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
+# stack is not yet released - but we need it
+RUN cd /usr/lib/python2.7/dist-packages/salt/pillar/ \
+  && wget https://raw.githubusercontent.com/saltstack/salt/develop/salt/pillar/stack.py \
+  && python -m py_compile stack.py
+
 EXPOSE 4505 4506
 
 ENTRYPOINT ["/bin/start.sh"]
