@@ -1,6 +1,6 @@
 master:
   container_name: salt-master
-  image: dawidmalina/docker-salt-master:14.04
+  image: dawidmalina/docker-salt-master:16.04
   privileged: true
   environment:
     LOG_LEVEL: info
@@ -21,14 +21,14 @@ ubuntu-14-04:
     LOG_LEVEL: info
   hostname: ubuntu-14-04
 
-ubuntu-15-10:
-  container_name: salt-slave-ubuntu-15-10
-  image: dawidmalina/docker-salt-slave-ubuntu:15.10
+ubuntu-16-04:
+  container_name: salt-slave-ubuntu-16-04
+  image: dawidmalina/docker-salt-slave-ubuntu:16.04
   links:
    - master
   environment:
     LOG_LEVEL: info
-  hostname: ubuntu-15-10
+  hostname: ubuntu-16-04
 
 centos-6-7:
   container_name: salt-slave-centos-6-7
@@ -39,11 +39,11 @@ centos-6-7:
     LOG_LEVEL: info
   hostname: centos-6-7
 
-centos-7-1:
-  container_name: salt-slave-centos-7-1
-  image: dawidmalina/docker-salt-slave-centos:7.1
+centos-7-2:
+  container_name: salt-slave-centos-7-2
+  image: dawidmalina/docker-salt-slave-centos:7.2
   links:
    - master
   environment:
     LOG_LEVEL: info
-  hostname: centos-7-1
+  hostname: centos-7-2
