@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.4
+FROM ubuntu:16.04
 
 ENV SALT_VERSION=2016.3.0+ds-1
 
@@ -6,8 +6,8 @@ ADD start.sh /bin/start.sh
 
 RUN apt-get update \
   && apt-get install -y vim-nox curl \
-  && curl -L https://repo.saltstack.com/apt/ubuntu/ubuntu14/latest/SALTSTACK-GPG-KEY.pub | apt-key add - \
-  && echo "deb http://repo.saltstack.com/apt/ubuntu/ubuntu14/latest trusty main" > /etc/apt/sources.list.d/saltstack.list \
+  && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add - \
+  && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
   && apt-get install -y salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
