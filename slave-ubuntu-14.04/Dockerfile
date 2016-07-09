@@ -1,6 +1,6 @@
 FROM ubuntu:14.04.4
 
-ENV SALT_VERSION=2016.3.0+ds-1
+ENV SALT_VERSION=2016.3.1+ds-1
 
 ADD start.sh /bin/start.sh
 
