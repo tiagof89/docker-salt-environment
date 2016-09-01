@@ -12,6 +12,10 @@ RUN apt-get update \
   && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
+  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
+  && sed -i -e 's/#default_include.*/default_include: master.d\/\*.conf/' /etc/salt/master \
+  && sed -i -e 's/#user.*/user: root/' /etc/salt/master \
+  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/master \
   && echo "auto_accept: True" > /etc/salt/master.d/auto_sign.conf \
   && echo "interface: 0.0.0.0\n\nfile_roots:\n  base:\n    - /srv/salt/state\n\npillar_roots:\n  base:\n    - /srv/salt/pillar\n" > /etc/salt/master.d/backends.conf \
   && rm -rf /var/lib/apt/lists/* \

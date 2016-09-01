@@ -9,6 +9,7 @@ RUN rpm --import https://repo.saltstack.com/yum/redhat/7/x86_64/latest/SALTSTACK
   && yum install -y salt-minion-${SALT_VERSION} epel-release \
   && mkdir -p /etc/salt/minion.d \
   && echo -e "master: master" > /etc/salt/minion.d/masters.conf \
+  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
   && rm -rf /var/lib/yum/* \
   && yum clean all \
   && echo -e "testmode: true\n" > /etc/salt/grains
