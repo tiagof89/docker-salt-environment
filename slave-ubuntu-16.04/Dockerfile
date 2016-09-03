@@ -9,14 +9,21 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION} xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y salt-minion=${SALT_VERSION}* \
+  && apt-get install -y salt-minion=${SALT_VERSION}* libdbus-1-3 libnih-dbus1 \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
-  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion
+  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
 
-RUN apt-get install -y resolvconf; exit 0
+  # fix missing resolvconf
+  && cd /tmp \
+  && apt-get download resolvconf \
+  && dpkg --unpack resolvconf_*_all.deb \
+  && rm /var/lib/dpkg/info/resolvconf.postinst \
+  && dpkg --configure resolvconf \
+  && apt-get install -yf \
 
-RUN rm -rf /var/lib/apt/lists/* \
+  # cleanup
+  && rm -rf /var/lib/apt/lists/* \
   && apt-get clean \
   && echo "testmode: true\n" > /etc/salt/grains
 
