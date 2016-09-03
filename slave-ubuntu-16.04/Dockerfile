@@ -12,8 +12,11 @@ RUN apt-get update \
   && apt-get install -y salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
-  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
-  && rm -rf /var/lib/apt/lists/* \
+  && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion
+
+RUN apt-get install -y resolvconf; exit 0
+
+RUN rm -rf /var/lib/apt/lists/* \
   && apt-get clean \
   && echo "testmode: true\n" > /etc/salt/grains
 
