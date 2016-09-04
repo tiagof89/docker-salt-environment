@@ -14,6 +14,9 @@ RUN apt-get update \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
 
+  # fix for systemd
+  && systemctl enable salt-minion \
+
   # fix missing resolvconf
   && cd /tmp \
   && apt-get download resolvconf \
