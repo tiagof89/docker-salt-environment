@@ -9,7 +9,7 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION} xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* sudo \
+  && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* salt-api=${SALT_VERSION}* salt-ssh=${SALT_VERSION}* sudo \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
@@ -18,6 +18,11 @@ RUN apt-get update \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/master \
   && echo "auto_accept: True" > /etc/salt/master.d/auto_sign.conf \
   && echo "interface: 0.0.0.0\n\nfile_roots:\n  base:\n    - /srv/salt/state\n\npillar_roots:\n  base:\n    - /srv/salt/pillar\n" > /etc/salt/master.d/backends.conf \
+  # add salt-api
+  && echo "rest_tornado:\n  port: 5417\n  host: 0.0.0.0\n  disable_ssl: true\n  websockets: True\n cors_origin: '*'" > /etc/salt/master.d/salt-api.conf \
+  && echo "external_auth:\n  pam:\n    api:\n        - .*\n        - '@runner'\n        - '@wheel'\n" >> /etc/salt/master.d/salt-api.conf \
+  && useradd -u 499 api -s /bin/false -M -d /opt/app \
+  && echo 'api:api123' | chpasswd \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
