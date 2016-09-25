@@ -21,8 +21,7 @@ RUN apt-get update \
   # add salt-api
   && echo "rest_cherrypy:\n  port: 8000\n  host: 0.0.0.0\n  disable_ssl: true\n" \
   && echo "external_auth:\n  pam:\n    api:\n        - .*\n        - '@runner'\n        - '@wheel'\n" >> /etc/salt/master.d/salt-api.conf \
-  && useradd -u 499 api -s /bin/false -M -d /opt/app \
-  && echo 'api:api123' | chpasswd \
+  && useradd -m -p api123 -s /bin/bash api \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
