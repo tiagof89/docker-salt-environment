@@ -9,7 +9,7 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION} xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* salt-api=${SALT_VERSION}* salt-ssh=${SALT_VERSION}* sudo \
+  && apt-get install -y salt-master=${SALT_VERSION}* salt-minion=${SALT_VERSION}* salt-api=${SALT_VERSION}* salt-ssh=${SALT_VERSION}* python-cherrypy sudo \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
