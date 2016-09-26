@@ -19,7 +19,7 @@ RUN apt-get update \
   && echo "auto_accept: True" > /etc/salt/master.d/auto_sign.conf \
   && echo "interface: 0.0.0.0\n\nfile_roots:\n  base:\n    - /srv/salt/state\n\npillar_roots:\n  base:\n    - /srv/salt/pillar\n" > /etc/salt/master.d/backends.conf \
   # add salt-api
-  && echo "rest_cherrypy:\n  port: 8000\n  host: 0.0.0.0\n  disable_ssl: true\n" \
+  && echo "rest_cherrypy:\n  port: 8000\n  host: 0.0.0.0\n  disable_ssl: true\n" > /etc/salt/master.d/salt-api.conf \
   && echo "external_auth:\n  pam:\n    api:\n        - .*\n        - '@runner'\n        - '@wheel'\n" >> /etc/salt/master.d/salt-api.conf \
   && useradd -m -p api123 -s /bin/bash api \
   && rm -rf /var/lib/apt/lists/* \
