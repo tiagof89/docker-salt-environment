@@ -16,7 +16,6 @@ RUN rpm --import https://repo.saltstack.com/yum/redhat/7/x86_64/archive/$SALT_VE
   && chkconfig salt-minion on \
 
   && rm -rf /var/lib/yum/* \
-  && yum clean all \
-  && echo -e "testmode: true\n" > /etc/salt/grains
+  && yum clean all
 
 ENTRYPOINT ["/bin/start.sh"]
