@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV SALT_VERSION=2016.3.1
+ENV SALT_VERSION=2016.3.2
 
 ADD start.sh /bin/start.sh
 
@@ -9,7 +9,7 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION} xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y libdbus-1-3 libnih-dbus1 sudo software-properties-common python-pip kmod libexpat-dev \
+  && apt-get install -y libdbus-1-3 libnih-dbus1 sudo software-properties-common python-pip kmod \
   && apt-get install -y salt-minion=${SALT_VERSION}* \
   && apt-get install -y salt-master=${SALT_VERSION}* salt-api=${SALT_VERSION}* salt-ssh=${SALT_VERSION}* \
   && pip install --upgrade pip \
