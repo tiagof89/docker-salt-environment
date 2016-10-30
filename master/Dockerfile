@@ -18,6 +18,9 @@ RUN apt-get update \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
 
+  # remove libexpat1-dev
+  && apt-get -y purge libexpat1-dev \
+
   # salt-api configuration
   && sed -i -e 's/#default_include.*/default_include: master.d\/\*.conf/' /etc/salt/master \
   && sed -i -e 's/#user.*/user: root/' /etc/salt/master \
