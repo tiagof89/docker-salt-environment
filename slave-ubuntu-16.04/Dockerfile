@@ -15,6 +15,9 @@ RUN apt-get update \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
 
+  # fix for getty consume 100% cpu
+  && systemctl disable getty@tty1.service \
+
   # fix for systemd
   && systemctl enable salt-minion \
 

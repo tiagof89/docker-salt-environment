@@ -33,6 +33,9 @@ RUN apt-get update \
   && echo "external_auth:\n  pam:\n    api:\n        - .*\n        - '@runner'\n        - '@wheel'\n" >> /etc/salt/master.d/salt-api.conf \
   && useradd -m -p api123 -s /bin/bash api \
 
+  # fix for getty consume 100% cpu
+  && systemctl disable getty@tty1.service \
+
   # fix for systemd
   && systemctl enable salt-master \
   && systemctl enable salt-minion \
