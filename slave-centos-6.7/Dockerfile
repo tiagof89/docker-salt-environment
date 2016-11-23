@@ -11,9 +11,6 @@ RUN rpm --import https://repo.saltstack.com/yum/redhat/6/x86_64/archive/$SALT_VE
   && echo -e "master: master" > /etc/salt/minion.d/masters.conf \
   && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/minion \
 
-  # fix for getty consume 100% cpu
-  && systemctl disable getty@tty1.service \
-
   # fix for systemd
   && yum install -y initscripts \
   && chkconfig salt-minion on \
