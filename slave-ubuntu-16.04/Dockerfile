@@ -9,7 +9,7 @@ RUN apt-get update \
   && curl -L https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - \
   && echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/${SALT_VERSION} xenial main" > /etc/apt/sources.list.d/saltstack.list \
   && apt-get update \
-  && apt-get install -y libdbus-1-3 libnih-dbus1 sudo software-properties-common \
+  && apt-get install -y libdbus-1-3 libnih-dbus1 sudo software-properties-common iputils-ping \
   && apt-get install -y salt-minion=${SALT_VERSION}* \
   && mkdir -p /etc/salt/minion.d \
   && echo "master: master" > /etc/salt/minion.d/masters.conf \
