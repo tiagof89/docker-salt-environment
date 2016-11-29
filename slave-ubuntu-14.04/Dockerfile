@@ -1,6 +1,6 @@
 FROM ubuntu-upstart:14.04
 
-ENV SALT_VERSION=2016.3.2
+ENV SALT_VERSION=2016.3.4
 
 ADD start.sh /bin/start.sh
 
