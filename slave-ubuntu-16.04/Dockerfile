@@ -28,6 +28,7 @@ RUN apt-get update \
   && rm /var/lib/dpkg/info/resolvconf.postinst \
   && dpkg --configure resolvconf \
   && apt-get install -yf \
+  && apt-mark hold resolvconf \
 
   # cleanup
   && rm -rf /var/lib/apt/lists/* \
