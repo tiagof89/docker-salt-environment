@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV SALT_VERSION=2016.11.3
+ENV SALT_VERSION=2017.7.0
 
 ADD start.sh /bin/start.sh
 
