@@ -1,4 +1,4 @@
-FROM centos:centos7.2.1511
+FROM centos:centos7.3.1611
 
 ENV SALT_VERSION=2017.7.1
 
