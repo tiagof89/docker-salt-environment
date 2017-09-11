@@ -1,6 +1,6 @@
 master:
   container_name: salt-master
-  image: dawidmalina/docker-salt-master:16.04
+  image: dawidmalina/docker-salt-master-ubuntu-16:2017.7.1
   privileged: true
   environment:
     LOG_LEVEL: info
